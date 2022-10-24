@@ -39,8 +39,8 @@ const Header = () => {
 					</li>
 					<li>
 						<div>
-							<Link href='/users'>
-								<a>Account</a>
+							<Link href='/profile'>
+								<a>Profile</a>
 							</Link>
 						</div>
 					</li>
