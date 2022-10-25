@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
-import useAuthContext from '../../utils/useAuthContext'
-import { getItems, getOneItem, baseUrl } from '../../utils/fetch'
+import useAuthContext from '../../../utils/useAuthContext'
+import { getItems, getOneItem, baseUrl } from '../../../utils/fetch'
 
 const Series = ({data}) => {
 	return(
@@ -10,8 +10,8 @@ const Series = ({data}) => {
 }
 
 export async function getStaticProps({ params }) {
-	const { series } = params
-	const data = await getOneItem(series, 'series')
+	const { id } = params
+	const data = await getOneItem(id, 'series')
 
 	return {
 		props: { data },
@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 	const series = await getItems('series')
 
 	const paths = series.map((item) => ({
-		params: { series: item.slug }
+		params: { id: item.id }
 	}))
 
 	return { paths, fallback: 'blocking' }
