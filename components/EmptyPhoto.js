@@ -4,7 +4,7 @@ const EmptyPhoto = (props) => {
 	const type = props.type // picture, still, poster
 	const small = props.small // boolean
 	if(type == 'picture'){
-		size == true ?
+		small == true ?
 		<Image
 			src='/photos/picture.png'
 			alt="a placeholder image"
@@ -20,7 +20,7 @@ const EmptyPhoto = (props) => {
 	}
 
 	if(type == 'poster'){
-		size == true ?
+		small == true ?
 		<Image
 			src='/photos/poster.png'
 			alt="a placeholder image"
@@ -36,7 +36,7 @@ const EmptyPhoto = (props) => {
 	}
 
 	if(type == 'still'){
-		size == true ?
+		small == true ?
 		<Image
 			src='/photos/still.png'
 			alt="a placeholder image"
