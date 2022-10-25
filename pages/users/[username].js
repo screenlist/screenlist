@@ -1,10 +1,18 @@
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import useAuthContext from '../../utils/useAuthContext'
 import { getItems, getOneItem, baseUrl } from '../../utils/fetch'
 import ProfileCore from '../../components/ProfileCore'
 
 const User = ({ user }) => {
+	const { currentUser, setCurrentUser } = useAuthContext()
+	const router = useRouter()
+
+	if(currentUser){
+		router.push('/profile')
+		return (<p> </p>)
+	}
 	
 	return (
 		<div>
