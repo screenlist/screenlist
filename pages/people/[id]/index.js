@@ -3,15 +3,15 @@ import { useState } from 'react'
 import useAuthContext from '../../utils/useAuthContext'
 import { getItems, getOneItem, baseUrl } from '../../utils/fetch'
 
-const Company = ({data}) => {
+const Person = ({data}) => {
 	return(
-		<h1>A company here</h1>
+		<h1>A series here</h1>
 	)
 }
 
 export async function getStaticProps({ params }) {
-	const { company } = params
-	const data = await getOneItem(company, 'companies')
+	const { id } = params
+	const data = await getOneItem(id, 'people')
 
 	return {
 		props: { data },
@@ -20,13 +20,13 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-	const companies = await getItems('companies')
+	const people = await getItems('people')
 
-	const paths = companies.map((item) => ({
-		params: { company: item.id }
+	const paths = people.map((item) => ({
+		params: { id: item.id }
 	}))
 
 	return { paths, fallback: 'blocking' }
 }
 
-export default Company
+export default Person
