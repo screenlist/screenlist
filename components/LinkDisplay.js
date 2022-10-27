@@ -27,4 +27,4 @@ const LinkDisplay = ({url, posterUrl, title, year}) => {
 	)
 }
 
-export default MiniDisplayMedia
+export default LinkDisplay

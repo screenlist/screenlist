@@ -4,6 +4,7 @@ const EmptyPhoto = (props) => {
 	const type = props.type // picture, still, poster
 	const small = props.small // boolean
 	if(type == 'picture'){
+		console.log('called')
 		small == true ?
 		<Image
 			src='/photos/picture.png'
@@ -51,3 +52,6 @@ const EmptyPhoto = (props) => {
 		/>
 	}
 }
+
+
+export default EmptyPhoto
