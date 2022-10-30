@@ -5,10 +5,7 @@ import { auth } from '../utils/firebase-config';
 
 
 
-const AuthProvider = ({ children }) => {
-	const [currentUser, setCurrentUser] = useState(null)
-	const value = {currentUser, setCurrentUser}
-	
+const AuthProvider = ({ children, value }) => {	
 	return (
 		<AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 	)

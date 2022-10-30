@@ -2,25 +2,20 @@ import {
 	getAuth, 
 	signInWithEmailAndPassword,
 	onAuthStateChanged
-} from 'firebase/auth';
-import { useState, useEffect } from 'react';
+} from 'firebase/auth'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import * as Yup from 'yup';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { auth } from '../utils/firebase-config';
+import * as Yup from 'yup'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { auth } from '../utils/firebase-config'
 import useAuthContext from '../utils/useAuthContext'
 
 const SigninForm = () => {
 	const baseUrl = process.env.NEXT_PUBLIC_SERVER
-	const [authError, setAuthError] = useState(null)
-	const {currentUser, setCurrentUser} = useAuthContext()
+	const [serverError, setServerError] = useState(null)
+	const {currentUser, username, setUsername} = useAuthContext()
 	const router = useRouter()
 
-	useEffect(() => {
-		if(currentUser){
-			router.push('/profile')
-		}
-	}, [currentUser])
 
 	return (
 		<Formik
@@ -31,50 +26,32 @@ const SigninForm = () => {
 				password: Yup.string().required('Required')
 			})}
 
-			onSubmit={async (values, { setErrors }) => {
-				try{
-					await signInWithEmailAndPassword(auth, values.email, values.password)
-					console.log('it runs')
-					const user = auth.currentUser
+			onSubmit={(values, { setErrors }) => {
+				signInWithEmailAndPassword(auth, values.email, values.password).then((credentials) => {
+					const user = auth.currentUser.reload()
 
-					if(user){
-						try {
-							console.log(user)
-							const token = await auth.currentUser.getIdToken(true)
-							const getAuth = await fetch(`${baseUrl}/users/auth`, {
-								method: 'POST',
-								headers: {
-									AuthorizationToken: token
-								}
-							})
-							const nameObject = await getAuth.json()
-							console.log(nameObject)
-							console.log({tokek: token})
-							const currentUser = {
-								displayName: user.displayName,
-								userName: nameObject.userName,
-								email: user.email,
-								emailVerified: user.emailVerified,
-								photoUrl: user.photoUrl,
-								uid: user.uid
-							}
-							nameObject.userName ? setCurrentUser(currentUser) : setCurrentUser(null)
-						} catch(err) {
-							console.log(err)
-							setCurrentUser(null)
-						}
-					} else {
-						console.log('there is not user')
-						setCurrentUser(null)
-						return null
+					if(!user.emallVerified){
+						router.push('/users/verify')
+						return setServerError('Redirecting...')
 					}
-				} catch(err) {
-					setAuthError("Invalid email or password")
-				}
+
+					const token = auth.currentUser.getIdToken(true)
+					console.log(token)
+					fetch(`${baseUrl}/users/auth`, {
+						method: 'POST',
+						headers: {
+							AuthorizationToken: token
+						}
+					}).then((res) => {res.json()}).then((data) => {
+						setUsername(data.username)
+						router.push(`/users/${data.username}`)
+					}).catch((err) => { setServerError(err.message) })
+				}).catch((err) => { setServerError(err.message) })				
 			}}
 		>
 			<Form>
-				{ authError ? <div>`${authError}`</div> : null }
+				<h2>Sign in</h2>
+				{ serverError ? <div>`${serverError}`</div> : null }
 
 				<label htmlFor= "email">Email</label>
 				<Field name= "email" type= "email" />

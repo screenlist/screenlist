@@ -3,9 +3,9 @@ import { auth } from '../utils/firebase-config'
 import useAuthContext from '../utils/useAuthContext'
 
 const SignOutButton = () => {
-	const {currentUser, setCurrentUser} = useAuthContext()
+	const {currentUser, setUsername} = useAuthContext()
 	function logOut () {
-		signOut(auth).then(() => setCurrentUser(null)).catch((err) => console.log(err))
+		signOut(auth).then(() => setUsename(null)).catch((err) => console.log(err))
 	}
 	return(
 		<>
