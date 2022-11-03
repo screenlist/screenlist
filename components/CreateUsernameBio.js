@@ -16,21 +16,25 @@ const CreateUsernameBio = () => {
 	const {currentUser, setUsername} = useAuthContext()
 
 	useEffect(() => {
-		!currentUser ? router.push('/users/signin') : null
+		if(!currentUser){
+			router.push('/users/signin')
+		}
 	}, [])
 
 	useEffect(() => {
-		if(!name){
-			return null
+		const search = async () => {
+			console.log(name)
+			try {
+				const res = await fetch(`${baseUrl}/users/search?q=${name}`)
+				const data = await res.json()
+				console.log(data)
+				setUserExists(data)					
+			} catch(err){
+				setServerError(err.message)
+			}
 		}
 
-		fetch(`/users/search?q=${name}`).then((res) => {
-			res.json()
-		}).then((data) => {
-			setUserExists(data)
-		}).catch((err) => {
-			setServerError(err.message)
-		})
+		return () => search()
 	}, [name])
 
 	if(!currentUser){
@@ -53,11 +57,12 @@ const CreateUsernameBio = () => {
 				onSubmit={async (values, { setErrors }) => {
 
 					if(userExists){
-						return setErrors({username: "Username already taken"})
+						setErrors({username: "Username already taken"})
+						return null
 					}
-
-					const token = auth.currentUser.getIdToken(true)
-
+					
+					const token = await auth.currentUser.getIdToken(true)
+					console.log(values.username, token.slice(0,10))
 					const requestConfig = {
 						method: 'POST',
 						headers: {
@@ -70,19 +75,23 @@ const CreateUsernameBio = () => {
 						})
 					}
 
-					fetch(`${baseUrl}/users/register`, requestConfig).then((res) => {
-						res.json()
-					}).then((data) => {
-						setUsername(data.username)
-						router.push(`/users/${data.username}`)
-					}).catch((err) => {
+					try {
+						const response = await fetch(`${baseUrl}/users/register`, requestConfig)
+						const data = await response.json()
+						console.log(data)
+						if(data.username){
+							setUsername(data.username)
+							router.push(`/users/${data.username}`)
+						}
+					} catch(err) {
+						console.log(err.message)
 						setServerError(err.message)
-					})
+					}
 				}}
 			>
 				<Form
 					onChange={(values) => {
-						if(values.target.name =='name'){
+						if(values.target.name =='username'){
 							setName(values.target.value)
 						}
 					}}
@@ -98,6 +107,8 @@ const CreateUsernameBio = () => {
 					<label htmlFor="bio">Bio</label>
 					<Field name="bio" type="textarea" />
 					<ErrorMessage name="bio" />
+
+					<button type="submit">Create</button>
 				</Form>
 			</Formik>
 		</section>
