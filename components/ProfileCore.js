@@ -8,17 +8,17 @@ const ProfileCore = ({displayName, username, bio, role, pictureUrl}) => {
 			<div>
 				{
 					pictureUrl ?
-					<fig>
+					<figure>
 						<Image 
 							src={pictureUrl}
 							alt={`${username} profile image`}
 							width={720}
 							height={720}
 						/>
-					</fig> :
-					<fig>
+					</figure> :
+					<figure>
 						<EmptyPhoto type='picture' />
-					</fig>
+					</figure>
 				}
 				<div>
 					{displayName && <p>{displayName}</p>}

@@ -1,39 +1,61 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import useAuthContext from '../../utils/useAuthContext'
-import { getItems, getOneItem, baseUrl } from '../../utils/fetch'
-import ProfileCore from '../../components/ProfileCore'
+import useAuthContext from '../../../utils/useAuthContext'
+import { getItems, getOneItem, baseUrl } from '../../../utils/fetch'
+import ProfileCore from '../../../components/ProfileCore'
+import SignOutButton from '../../../components/SignOutButton'
 
 const User = ({ user }) => {
-	const { currentUser, setCurrentUser } = useAuthContext()
+	const { currentUser, username } = useAuthContext()
+	const [isSignedIn, setIsSignedIn] = useState(false)
 	const router = useRouter()
 
-	if(currentUser){
-		router.push('/profile')
-		return (<p> </p>)
-	}
-	
+	useEffect(() => {
+		if(currentUser && username){
+			if(currentUser.uid == user.uid && user.userName == username){
+				setIsSignedIn(true)
+			}
+		}
+	}, [])
+
+	useEffect(() => {
+		console.log(isSignedIn)
+		if(isSignedIn){
+			if(!currentUser.emailVerified){
+				router.push('/users/verify-email')
+			}
+		}
+	}, [isSignedIn])
+		
 	return (
 		<div>
-			<h1>User profile of {user.userName}</h1>
+			<div>
+				{isSignedIn ? <SignOutButton /> : (<Link href='/users/signup'><a>Create Account</a></Link>)}
+			</div>
+			<h1>{isSignedIn ? 'Your profile' : `User profile of ${user.userName}`}</h1>
 			<ProfileCore
 				username={user.userName}
-				role={user.role}
-				pictureUrl={user.photoUrl}
-				bio={user.bio}
+				role={user?.role}
+				pictureUrl={user?.photoUrl}
+				bio={user?.bio}
 			/>
 		</div>
 	)
 }
 
-export async function getStaticProps({ params }) {
-	const { username } = params
-	const user = await getOneItem(username, 'users')
+export async function getStaticProps(context) {
+	const { username } = context.params
 
-	return {
-		props: { user },
-		revalidate: 30
+	try{
+		const user = await getOneItem(username, 'users')
+
+		return {
+			props: { user },
+			revalidate: 30
+		}
+	} catch(err) {
+		console.log(err)
 	}
 }
 

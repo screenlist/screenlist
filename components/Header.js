@@ -2,8 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../styles/Header.module.css'
 import SignOutButton from './SignOutButton'
+import useAuthContext from '../utils/useAuthContext'
 
 const Header = () => {
+	const {currentUser, username} = useAuthContext()
 	return(
 		<header>
 			<nav role='main menu'>
@@ -39,14 +41,9 @@ const Header = () => {
 					</li>
 					<li>
 						<div>
-							<Link href='/profile'>
+							<Link href={currentUser && username ? `/users/${username}` : '/users/signin'} >
 								<a>Profile</a>
 							</Link>
-						</div>
-					</li>
-					<li>
-						<div>
-							<SignOutButton/>
 						</div>
 					</li>
 				</ul>
