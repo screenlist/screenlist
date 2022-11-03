@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react'
 import { sendEmailVerification } from 'firebase/auth'
 import { auth } from '../../utils/firebase-config'
 import useAuthContext from '../../utils/useAuthContext'
+import LoadingState from '../../components/LoadingState'
 
 
 const VerifyEmail = () => {
-	const { currentUser, setCurrentUser } = useAuthContext()
+	const { currentUser, username } = useAuthContext()
 	const [isSent, setIsSent] = useState(false)
 
 	const router = useRouter()
@@ -17,18 +18,26 @@ const VerifyEmail = () => {
 		setIsSent(false)
 		sendEmailVerification(auth.currentUser).then(() => {
 			setIsSent(true)
-		})
+		}).catch((err) => {console.log(err)})
 	}
 
-	useEffect(() => {
-		if(!currentUser){
+	
+	if(!currentUser){
+		useEffect(() => {
 			router.push('/users/signin')
-		} else if(currentUser.emailVerified === true){
-			router.push('/profile')
-		} else {
-			send()
-		}
-	}, [])
+		}, [])
+
+		return <LoadingState />
+	}
+
+	if(currentUser?.emailVerified){
+
+		return (
+			<section>
+				<h1>This email is verified, thank you.</h1>
+			</section>
+		)
+	}
 
 	return (
 		<section>
