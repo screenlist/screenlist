@@ -26,10 +26,7 @@ const SignupForm = () => {
 			onSubmit={(values, { setErrors }) => {
 
 				createUserWithEmailAndPassword(auth, values.email, values.password).then((credential) => {
-					const user = credential.user
-					if(!user.emailVerified){
-						router.push('/users/verify')
-					}
+					router.push('/users/setup-profile')
 				}).catch((err) => {
 					setServerError(err.message)
 				})

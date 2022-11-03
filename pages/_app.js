@@ -6,17 +6,8 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../utils/firebase-config'
 
 function MyApp({ Component, pageProps }) {
-	const [currentUser, setCurrentUser] = useState(null)
-	const [username, setUsername] =useState(null)
-
-	useEffect(() => {
-		onAuthStateChanged(auth, (user) => {
-			setCurrentUser(user)
-		})
-	}, [])
-
 	return(
-		<AuthProvider value={{currentUser, username, setUsername}} >
+		<AuthProvider>
 			<Layout>
 				<Component {...pageProps} />
 			</Layout>

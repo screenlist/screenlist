@@ -27,25 +27,30 @@ const SigninForm = () => {
 			})}
 
 			onSubmit={(values, { setErrors }) => {
-				signInWithEmailAndPassword(auth, values.email, values.password).then((credentials) => {
-					const user = auth.currentUser.reload()
+				signInWithEmailAndPassword(auth, values.email, values.password).then(async (credentials) => {
+					const user = credentials.user
 
-					if(!user.emallVerified){
-						router.push('/users/verify')
-						return setServerError('Redirecting...')
+					if(!user.emailVerified){
+						router.push('/users/verify-email')
+						return null
 					}
 
-					const token = auth.currentUser.getIdToken(true)
-					console.log(token)
+					const token = await auth.currentUser.getIdToken(true)
 					fetch(`${baseUrl}/users/auth`, {
 						method: 'POST',
 						headers: {
 							AuthorizationToken: token
 						}
-					}).then((res) => {res.json()}).then((data) => {
+					}).then((res) => res.json()).then((data) => {
 						setUsername(data.username)
 						router.push(`/users/${data.username}`)
-					}).catch((err) => { setServerError(err.message) })
+					}).catch((err) => { 
+						console.log(err)
+						if(err.status == 404){
+							router.push('/users/setup-profile')
+						}
+						setServerError(err.message) 
+					})
 				}).catch((err) => { setServerError(err.message) })				
 			}}
 		>
