@@ -9,6 +9,7 @@ import * as Yup from 'yup'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { auth } from '../utils/firebase-config'
 import useAuthContext from '../utils/useAuthContext'
+import styles from '../styles/SignInForm.module.css'
 
 const SigninForm = () => {
 	const baseUrl = process.env.NEXT_PUBLIC_SERVER
@@ -54,17 +55,19 @@ const SigninForm = () => {
 				}).catch((err) => { setServerError(err.message) })				
 			}}
 		>
-			<Form>
-				<h2>Sign in</h2>
+			<Form className="form">
+				<h1 className="heading-one">Sign in</h1>
 				{ serverError ? <div>`${serverError}`</div> : null }
-
-				<label htmlFor= "email">Email</label>
-				<Field name= "email" type= "email" />
-				<ErrorMessage name= "email" />
-
-				<label htmlFor= "password">Password</label>
-				<Field name= "password" type= "password" />
-				<ErrorMessage name= "password" />
+				<div className="form-field">
+					<label htmlFor= "email">Email</label>
+					<Field name= "email" type= "email" />
+					<ErrorMessage name= "email" />
+				</div>
+				<div className="form-field">
+					<label htmlFor= "password">Password</label>
+					<Field name= "password" type= "password" />
+					<ErrorMessage name= "password" />
+				</div>
 
 				<button type="submit">Sign in</button>
 			</Form>

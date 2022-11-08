@@ -1,16 +1,105 @@
+:root {
+	--first-color: #008080;
+	--second-color: #EEEEEE;
+	--third-color: #00092C;
+	--fourth-color: #B20600;
+	--fifth-color: #FFFFFF;
+}
+
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	font-size: 1.1rem;
+	line-height:1.2rem;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	background: var(--fifth-color);
+	color: var(--third-color);
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: var(--third-color);
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+h1, h2, {
+	color: var(--first-color);
+}
+
+textarea {
+	height: 200px;
+	width: 100%;
+}
+
+label {
+	margin: 0 0 0.3rem 0;
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+input {
+	background: var(--fifth-color);
+	height: 2rem;
+	border: 3px solid var(--third-color);
+	border-radius: 5px;
+	font-size: 1.3rem;
+	padding: 0.3rem;
+}
+
+input:focus {
+	border: 3px solid var(--first-color);
+}
+
+.error {
+	color: var(--fourth-color);
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 0 10% 0 10%;
+	width: 100%;
+	height: 100%;
+}
+
+.form-bar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 0 10% 0 10%;
+	width: 100%;
+}
+
+.form-field {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	margin: 0 0 1rem 0;
+	height: 100%;
+}
+
+.form-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.form-with-bar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.heading-one {
+	font-size: 2.3rem;
+	color: var(--first-color);
+	line-height: 2.5rem;
 }

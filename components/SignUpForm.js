@@ -32,18 +32,21 @@ const SignupForm = () => {
 				})
 			}}
 		>
-			<Form>
-				<h2>Create an account</h2>
+			<Form className="form" > 
+				<h1 className="heading-one">Create an account</h1>
 				
-				{ serverError ? <div>`${serverError}`</div> : null }
+				{ serverError ? <div className="error">`${serverError}`</div> : null }
+				<div className="form-field">
+					<label htmlFor= "email">Email</label>
+					<Field name= "email" type= "email" />
+					<ErrorMessage name= "email" />
+				</div>
 
-				<label htmlFor= "email">Email</label>
-				<Field name= "email" type= "email" />
-				<ErrorMessage name= "email" />
-
-				<label htmlFor= "password">Password</label>
-				<Field name= "password" type= "password" />
-				<ErrorMessage name= "password" />
+				<div className="form-field">
+					<label htmlFor= "password">Password</label>
+					<Field name= "password" type= "password" />
+					<ErrorMessage name= "password" />
+				</div>
 
 				<button type="submit">Sign up</button>
 			</Form>
