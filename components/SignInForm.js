@@ -36,22 +36,32 @@ const SigninForm = () => {
 						return null
 					}
 
-					const token = await auth.currentUser.getIdToken(true)
-					fetch(`${baseUrl}/users/auth`, {
-						method: 'POST',
-						headers: {
-							AuthorizationToken: token
-						}
-					}).then((res) => res.json()).then((data) => {
-						setUsername(data.username)
-						router.push(`/users/${data.username}`)
-					}).catch((err) => { 
-						console.log(err)
-						if(err.status == 404){
-							router.push('/users/setup-profile')
-						}
-						setServerError(err.message) 
-					})
+					auth.currentUser.getIdToken(true).then((token) => {
+						fetch(`${baseUrl}/users/auth`, {
+							method: 'POST',
+							headers: {
+								AuthorizationToken: token
+							}
+						}).then((res) => res.json()).then((data) => {
+							if(data.username){
+								setUsername(data.username)
+								router.push(`/users/${data.username}`)
+							} else {
+								console.log(data)
+								if(data.statusCode == 404){
+									router.push('/users/setup-profile')
+									return null
+								}
+								setServerError(data.message)
+							}
+						}).catch((err) => { 
+							console.log(err)
+							if(err.statusCode == 404){
+								router.push('/users/setup-profile')
+							}
+							setServerError(err.message) 
+						})
+					}).catch((err) => {})					
 				}).catch((err) => { setServerError(err.message) })				
 			}}
 		>
@@ -61,15 +71,19 @@ const SigninForm = () => {
 				<div className="form-field">
 					<label htmlFor= "email">Email</label>
 					<Field name= "email" type= "email" />
-					<ErrorMessage name= "email" />
+					<div className="error">
+						<ErrorMessage name="name" />
+					</div>
 				</div>
 				<div className="form-field">
 					<label htmlFor= "password">Password</label>
 					<Field name= "password" type= "password" />
-					<ErrorMessage name= "password" />
+					<div className="error">
+						<ErrorMessage name="name" />
+					</div>
 				</div>
 
-				<button type="submit">Sign in</button>
+				<button className="form-submit" type="submit">Sign in</button>
 			</Form>
 		</Formik>
 	)

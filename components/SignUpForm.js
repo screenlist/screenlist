@@ -39,16 +39,20 @@ const SignupForm = () => {
 				<div className="form-field">
 					<label htmlFor= "email">Email</label>
 					<Field name= "email" type= "email" />
-					<ErrorMessage name= "email" />
+					<div className="error">
+						<ErrorMessage name="email" />
+					</div>
 				</div>
 
 				<div className="form-field">
 					<label htmlFor= "password">Password</label>
 					<Field name= "password" type= "password" />
-					<ErrorMessage name= "password" />
+					<div className="error">
+						<ErrorMessage name="password" />
+					</div>
 				</div>
 
-				<button type="submit">Sign up</button>
+				<button className="form-submit" type="submit">Sign up</button>
 			</Form>
 		</Formik>
 	)
