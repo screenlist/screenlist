@@ -24,7 +24,7 @@ const CreateSeriesForm = () => {
 	}
 
 	return (
-		<section>
+		<section className="form-with-bar">
 			<Formik
 				initialValues={fields}
 				validationSchema={Yup.object({
@@ -51,66 +51,115 @@ const CreateSeriesForm = () => {
 				}}
 			>
 				<Form
+					className="form"
 					onChange={(values) => {
 						if(values.target.name =='name'){
 							setName(values.target.value)
 						}
 					}}
 				>
-					<h2>Add a new series</h2>
+					<h1>Add a new series</h1>
 
-					<label htmlFor="name">Title</label>
-					<Field name="name" type="text" />
-					<ErrorMessage name="name" />
+					<div className="form-field">
+						<label htmlFor="name">Title</label>
+						<Field name="name" type="text" />
+						<div className="error">
+							<ErrorMessage name="name" />
+						</div>
+					</div>
 
-					<label htmlFor="productionStage">Production Stage</label>
-					<Field name="productionStage" type="text" />
-					<ErrorMessage name="productionStage" />
+					<div className="form-field">
+						<label htmlFor="productionStage">Production Stage</label>
+						<Field name="productionStage" type="text" />
+						<div className="error">
+							<ErrorMessage name="productionStage" />
+						</div>
+					</div>
 
-					<label htmlFor="trailerUrl">Trailer URL</label>
-					<Field name="trailerUrl" type="text" />
-					<ErrorMessage name="trailerUrl" />
+					<div className="form-field">
+						<label htmlFor="trailerUrl">Trailer URL</label>
+						<Field name="trailerUrl" type="text" />
+						<div className="error">
+							<ErrorMessage name="trailerUrl" />
+						</div>
+					</div>
 
-					<label htmlFor="type">Type</label>
-					<Field name="type" type="text" />
-					<ErrorMessage name="type" />
+					<div className="form-field">
+						<label htmlFor="type">Type</label>
+						<Field name="type" type="text" />
+						<div className="error">
+							<ErrorMessage name="type" />
+						</div>
+					</div>
 
-					<label htmlFor="seasons">Seasons</label>
-					<Field name="seasons" type="number" />
-					<ErrorMessage name="seasons" />					
+					<div className="form-field">
+						<label htmlFor="seasons">Seasons</label>
+						<Field name="seasons" type="number" />
+						<div className="error">
+							<ErrorMessage name="seasons" />
+						</div>				
+					</div>
 
-					<label htmlFor= "runtime">Runtime</label>
-					<Field name= "runtime" type="number" />
-					<ErrorMessage name= "runtime" />
+					<div className="form-field">
+						<label htmlFor= "runtime">Runtime</label>
+						<Field name= "runtime" type="number" />
+						<div className="error">
+							<ErrorMessage name="runtime" />
+						</div>
+					</div>
 
-					<label htmlFor="logline">Logline</label>
-					<Field name="logline" type="text" />
-					<ErrorMessage name="logline" />
+					<div className="form-field">
+						<label htmlFor="logline">Logline</label>
+						<Field name="logline" type="text" />
+						<div className="error">
+							<ErrorMessage name="logline" />
+						</div>
+					</div>
 
-					<label htmlFor="plotSummary">Plot Summary</label>
-					<Field name="plotSummary" as="textarea" />
-					<ErrorMessage name="plotSummary" />
+					<div className="form-field">
+						<label htmlFor="plotSummary">Plot Summary</label>
+						<Field name="plotSummary" as="textarea" />
+						<div className="error">
+							<ErrorMessage name="plotSummary" />
+						</div>
+					</div>
 
-					<label htmlFor="releaseDate">Release Date</label>
-					<Field name="releaseDate" type="date" />
-					<ErrorMessage name="releaseDate" />
+					<div className="form-field">
+						<label htmlFor="releaseDate">Release Date</label>
+						<Field name="releaseDate" type="date" />
+						<div className="error">
+							<ErrorMessage name="releaseDate" />
+						</div>
+					</div>
 
-					<label htmlFor="finalEpisodeDate">Final Episode Date</label>
-					<Field name="finalEpisodeDate" type="date" />
-					<ErrorMessage name="finalEpisodeDate" />
+					<div className="form-field">
+						<label htmlFor="finalEpisodeDate">Final Episode Date</label>
+						<Field name="finalEpisodeDate" type="date" />
+						<div className="error">
+							<ErrorMessage name="finalEpisodeDate" />
+						</div>
+					</div>
 
-					<label htmlFor="originalPlatform">Original Platform</label>
-					<Field name="originalPlatform" type="text" />
-					<ErrorMessage name="originalPlatform" />
+					<div className="form-field">
+						<label htmlFor="originalPlatform">Original Platform</label>
+						<Field name="originalPlatform" type="text" />
+						<div className="error">
+							<ErrorMessage name="originalPlatform" />
+						</div>
+					</div>
 
-					<label htmlFor="genres">Genres</label>
-					<Field name="genres" type="text" />
-					<ErrorMessage name="genres" />
+					<div className="form-field">
+						<label htmlFor="genres">Genres</label>
+						<Field name="genres" type="text" />
+						<div className="error">
+							<ErrorMessage name="genres" />
+						</div>
+					</div>
 
-					<button type="submit">Create</button>
+					<button className="form-submit" type="submit">Create</button>
 				</Form>
 			</Formik>
-			<SearchSimilarResources name={name} resource='series' />
+			<SearchSimilarResources className="form-bar" name={name} resource='series' />
 		</section>
 	)
 }

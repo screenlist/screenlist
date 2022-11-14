@@ -67,7 +67,9 @@ const CreateFilmForm = () => {
 					<div className="form-field" >
 						<label htmlFor="trailerUrl">Trailer URL</label>
 						<Field name="trailerUrl" type="text" />
-						<ErrorMessage name="trailerUrl" />
+						<div className="error">
+							<ErrorMessage name="trailerUrl" />
+						</div>
 					</div>
 
 					<div className="form-field" >
@@ -77,7 +79,9 @@ const CreateFilmForm = () => {
 							<option value="fiction">Fiction</option>
 							<option value="documentary">Documentary</option>
 						</Field>
-						<ErrorMessage name="type" />
+						<div className="error">
+							<ErrorMessage name="type" />
+						</div>
 					</div>
 
 					<div className="form-field" >
@@ -87,7 +91,9 @@ const CreateFilmForm = () => {
 							<option value="feature">Feature film</option>
 							<option value="short">Short film</option>
 						</Field>
-						<ErrorMessage name="format" />
+						<div className="error">
+							<ErrorMessage name="format" />
+						</div>
 					</div>
 
 					<div className="form-field" >
@@ -100,46 +106,60 @@ const CreateFilmForm = () => {
 							<option value="post-production">Post-production</option>
 							<option value="finished">Finished</option>
 						</Field>
-						<ErrorMessage name="productionStage" />
+						<div className="error">
+							<ErrorMessage name="productionStage" />
+						</div>
 					</div>
 
 					<div className="form-field" >
 						<label htmlFor= "runtime">Runtime</label>
 						<Field name= "runtime" type="number" />
-						<ErrorMessage name= "runtime" />
+						<div className="error">
+							<ErrorMessage name="runtime" />
+						</div>
 					</div>
 
 					<div className="form-field" >
 						<label htmlFor="logline">Logline</label>
 						<Field name="logline" type="text" />
-						<ErrorMessage name="logline" />
+						<div className="error">
+							<ErrorMessage name="logline" />
+						</div>
 					</div>
 
 					<div className="form-field" >
 						<label htmlFor="plotSummary">Plot Summary</label>
 						<Field name="plotSummary" as="textarea" />
-						<ErrorMessage name="plotSummary" />
+						<div className="error">
+							<ErrorMessage name="plotSummary" />
+						</div>
 					</div>
 
 					<div className="form-field" >
 						<label htmlFor="releaseDate">Release Date</label>
 						<Field name="releaseDate" type="date" />
-						<ErrorMessage name="releaseDate" />
+						<div className="error">
+							<ErrorMessage name="releaseDate" />
+						</div>
 					</div>
 
 					<div className="form-field" >
 						<label htmlFor="initialPlatform">Initial Platform</label>
 						<Field name="initialPlatform" type="text" />
-						<ErrorMessage name="initialPlatform" />
+						<div className="error">
+							<ErrorMessage name="initialPlatform" />
+						</div>
 					</div>
 
 					<div className="form-field" >
 						<label htmlFor="genres">Genres</label>
 						<Field name="genres" type="text" />
-						<ErrorMessage name="genres" />
+						<div className="error">
+							<ErrorMessage name="genres" />
+						</div>
 					</div>
 
-					<button type="submit">Create</button>
+					<button className="form-submit" type="submit">Create</button>
 				</Form>
 			</Formik>
 			<SearchSimilarResources className='form-bar' name={name} resource='films' />

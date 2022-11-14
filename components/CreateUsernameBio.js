@@ -90,6 +90,7 @@ const CreateUsernameBio = () => {
 				}}
 			>
 				<Form
+					className="form"
 					onChange={(values) => {
 						if(values.target.name =='username'){
 							setName(values.target.value)
@@ -98,17 +99,25 @@ const CreateUsernameBio = () => {
 				>
 					<h2>Set up profile</h2>
 
-					{serverError && <p>{serverError}</p>}
+					{serverError && <p className="error">{serverError}</p>}
 
-					<label htmlFor="username">Username</label>
-					<Field name="username" type="text" />
-					<ErrorMessage name="username" />
+					<div className="form-field">
+						<label htmlFor="username">Username</label>
+						<Field name="username" type="text" />
+						<div className="error">
+							<ErrorMessage name="username" />
+						</div>
+					</div>
 
-					<label htmlFor="bio">Bio</label>
-					<Field name="bio" type="textarea" />
-					<ErrorMessage name="bio" />
+					<div className="form-field">
+						<label htmlFor="bio">Bio</label>
+						<Field name="bio" type="textarea" />
+						<div className="error">
+							<ErrorMessage name="bio" />
+						</div>
+					</div>
 
-					<button type="submit">Create</button>
+					<button className="form-submit" type="submit">Create</button>
 				</Form>
 			</Formik>
 		</section>
