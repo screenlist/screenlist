@@ -1,0 +1,20 @@
+.pageContainer {
+	padding-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.topBand {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 1rem;
+	padding-bottom: 0;
+	border-bottom: 0.2rem solid var(--main-color);
+	min-width: 100%;
+}
+
+.coreAndSettings {}

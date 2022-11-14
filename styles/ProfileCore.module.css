@@ -1,0 +1,76 @@
+.bioContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.bioContainer > p {
+	margin: 0;
+	max-width: 350px;
+	font-size: 1.1rem;
+}
+
+.bioContainer > h3 {
+	margin-bottom: 0.2rem;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem 0;
+}
+
+.coreInfoContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+}
+
+.coreInfoContainer > figure {
+	padding: 0;
+	margin: 0;
+	width: 250px;
+	border: 1px transparent solid;
+	border-radius: 250px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.nameAndRoleContainer {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.username {
+	padding: 1rem 0 0.5rem 0;
+	margin: 0;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.role {
+	padding: 0.1rem 0.8rem;
+	margin: 0;
+	color: var(--base-color);
+	background: var(--awe-color);
+	font-weight: 600;
+	font-size: 1rem;
+	border: 1px transparent solid;
+	border-radius: 1rem;
+}
+
+@media(min-width: 600px){}
+
+@media(min-width: 1000px){}
+
+@media(min-width: 1200px){}

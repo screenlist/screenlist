@@ -4,7 +4,7 @@ import CreateUsernameBio from '../../components/CreateUsernameBio'
 
 export default function SetUpProfile() {
 	return (
-		<div>
+		<div className="form-page">
 			<CreateUsernameBio/>
 		</div>
 	)
