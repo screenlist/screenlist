@@ -1,22 +1,38 @@
 import Link from 'next/link'
 import useAuthContext from '../../utils/useAuthContext'
+import { getItems, baseUrl } from '../../utils/fetch'
 
-const User = () => {
-	const {currentUser, setCurrentUser} = useAuthContext()
-	console.log(currentUser)
+const User = ({users}) => {
 	return (
-		<div>
+		<section>
+			<h1>Users</h1>
 			{
-				currentUser ?
-				(
-					<section>
-						<h1>{currentUser.userName}</h1>
-						<p>email: {currentUser.email}</p>
-					</section>
-				) : <Link href="/users/signin">Sign in</Link>
+				users.map((user) => {
+					return (
+						<div key={user.uid}>
+							<Link href={`/users/${user.userName}`}>
+								<a title={user.userName}>
+									<div>
+										<h2>{user.userName}</h2>
+										<p>{user.role}</p>
+									</div>
+								</a>
+							</Link>
+						</div>
+					)
+				})
 			}
-		</div>
+		</section>
 	)
+}
+
+export async function getStaticProps() {
+	const users = await getItems('users')
+
+	return {
+		props: { users },
+		revalidate: 30
+	}
 }
 
 export default User
