@@ -4,9 +4,9 @@ import SigninForm from '../../components/SignInForm'
 
 export default function SignIn() {
 	return (
-		<div>
+		<div className="form-page" >
 			<SigninForm/>
-			<p>Don't have an account? <Link href="/users/signup"><a>Sign up</a></Link></p>
+			<p>Don't have an account? <Link href="/users/signup"><a className="link">Sign up</a></Link></p>
 		</div>
 	)
 }

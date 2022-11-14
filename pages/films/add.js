@@ -2,7 +2,9 @@ import CreateFilmForm from '../../components/CreateFilmForm'
 
 const AddFilm = () => {
 	return (
-		<CreateFilmForm/>
+		<div className="form-page">
+			<CreateFilmForm/>
+		</div>
 	)
 }
 
