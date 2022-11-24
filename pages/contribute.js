@@ -30,6 +30,16 @@ const Contribute = () => {
 					</Link>
 				</li>
 			</ul>
+			<p>By default, capitalize all words
+			Always capitalize the first and last word in titles and subtitles
+				Capitalize both parts of hyphenated words
+				Lowercase articles: a, an, the
+				Lowercase conjunctions: and, but, or, nor
+				Lowercase short prepositions: as, at, by, for, in, of, on, per, to, via
+				Lowercase versus: vs., vs, v., v
+				Lowercase NYT words*: en, if
+				Let intentional capitalization stand
+			</p>
 		</section>
 	)
 }
