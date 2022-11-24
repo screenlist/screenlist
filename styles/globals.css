@@ -7,15 +7,16 @@
 	--danger-color: #C70300;
 	--base-color: #F6ECE5;
 	--awe-color: #CC3D00;
+	--brand-color-flex: rgba(0, 128, 128, 0.4);
 }
 
 html,
 body {
 	padding: 0;
 	margin: 0;
-	font-size: 1.1rem;
+	font-size: 1rem;
 	font-weight: 400;
-	line-height:1.25rem;
+	line-height:1.05rem;
 	font-family: 'Red Hat Text', sans-serif;
 	background: var(--base-color);
 	color: var(--main-color);
@@ -29,7 +30,7 @@ body {
 }
 
 a {
-	color: var(--main-color);
+	color: inherit;
 	text-decoration: none;
 }
 
@@ -38,30 +39,48 @@ a {
 }
 
 h1, h2, h3 {
-	color: var(--brand-color);
+	color: var(--main-color);
+}
+
+h4, h5, h6 {
+	color: var(--main-color);
 }
 
 h1 {
-	font-size: 2rem;
-	font-weight: 800;
-	line-height: 2.1rem;
+	font-size: 1.5rem;
+	font-weight: bold;
 }
 
 h2 {
-	font-size: 1.7rem;
-	font-weight: 600;
-	line-height: 1.8rem;
+	font-size: 1.125rem;
+	font-weight: bold;
 }
 
 h3 {
-	font-size: 1.5rem;
-	font-weight: 500;
-	line-height: 1.6rem;
+	font-size: 1.125rem;
+	font-weight: bold;
+}
+
+h4 {
+	/*line-height: 1.1;
+	letter-spacing: -0.025rem;*/
 }
 
 textarea {
 	height: 200px;
 	width: 100%;
+	resize: none;
+	color: var(--accent-color);
+	border: 2px solid var(--accent-color);
+	border-radius: 5px;
+	background: var(--base-color);
+	font-size: 1.2rem;
+	padding: 0.3rem;
+}
+
+textarea:focus {
+	border: none;
+	outline: 2px solid var(--main-color);
 }
 
 label {
@@ -93,9 +112,9 @@ input:focus {
 	background: var(--danger-color);
 	color: var(--base-color);
 	width: fit-content;
-	font-size: 1.2rem;
-	font-weight: 600;
-	padding: 0.25rem 0.5rem;
+	font-size: 1.125rem;
+	font-weight: bold;
+	padding: 0.125rem 0.25rem;
 	border: 0.2rem solid var(--danger-color);
 	border-radius: 0.2rem;
 }
@@ -104,9 +123,9 @@ input:focus {
 	background: var(--brand-color);
 	color: var(--base-color);
 	width: fit-content;
-	font-size: 1.2rem;
-	font-weight: 600;
-	padding: 0.25rem 0.5rem;
+	font-size: 1.125rem;
+	font-weight: bold;
+	padding: 0.125rem 0.25rem;
 	border: 0.2rem solid var(--brand-color);
 	border-radius: 0.2rem;
 }
@@ -115,9 +134,9 @@ input:focus {
 	background: var(--awe-color);
 	color: var(--base-color);
 	width: fit-content;
-	font-size: 1.2rem;
-	font-weight: 600;
-	padding: 0.25rem 0.5rem;
+	font-size: 1.125rem;
+	font-weight: bold;
+	padding: 0.125rem 0.25rem;
 	border: 0.2rem solid var(--awe-color);
 	border-radius: 0.2rem;
 }
@@ -126,17 +145,40 @@ input:focus {
 	background: transparent;
 	color: var(--main-color);
 	width: fit-content;
-	font-size: 1.2rem;
-	font-weight: 600;
-	padding: 0.25rem 0.5rem;
+	font-size: 1.125rem;
+	font-weight: bold;
+	padding: 0.125rem 0.25rem;
 	border: 0.2rem var(--main-color) solid;
 	border-radius: 0.2rem;
+}
+
+.danger {
+	color: var(--danger-color);
+}
+
+.good {
+	color: var(--brand-color);
+}
+
+.flexible {
+	color: inherit;
 }
 
 .error {
 	color: var(--danger-color);
 	font-size: 0.8rem;
 	font-weight: bold;
+}
+
+.empty-state-container {
+	min-height: 100%;
+	min-width: 100%;
+	display: grid;
+	place-items: center;
+}
+
+.empty-state-text-container {
+	max-width: 80%;
 }
 
 .form {
@@ -146,7 +188,6 @@ input:focus {
 	/*padding: 0 10% 0 10%;*/
 	/*min-width: 350px;*/
 	width: 90vw;
-	height: 100%;
 	max-width: 335px;
 }
 
@@ -161,6 +202,20 @@ input:focus {
 	max-width: 335px;
 }
 
+.form-checkbox-label {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex: 0 1 fit-content;
+	margin: 0.2rem 0.5rem 0.2rem 0;
+}
+
+.form-checkbox-label-container {
+	display: flex;
+	flex-wrap: wrap;
+	padding-top: 0.5rem;
+}
+
 .form-field {
 	display: flex;
 	flex-direction: column;
@@ -172,10 +227,21 @@ input:focus {
 .form-largeText-field {}
 
 .form-page {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	display: grid;
+	place-items: center;
+	min-height: 70vh;
+}
+
+.form-popup {
+	display: grid;
+	place-items: center;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	background: var(--base-color);
 }
 
 .form-with-bar {
@@ -211,6 +277,25 @@ input:focus {
 	line-height: 2.5rem;
 }*/
 
+.h1 {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.h2 {
+	font-size: 1.125rem;
+	font-weight: bold;
+}
+
+.h3 {
+	font-size: 1.125rem;
+	font-weight: bold;
+}
+
+.h4 {
+	font-weight: bold;
+}
+
 .hiddenContent {
 	visibility: hidden;
 	overflow: hidden;
@@ -226,9 +311,12 @@ input:focus {
 	overflow: hidden;
 }
 
+.layout-progressive {
+	display: flex;
+	flex-direction: column;
+}
+
 .link {
-	background: var(--base-color);
-	color: var(--main-color);
 	width: fit-content;
 	font-size: 1.1rem;
 	font-weight: 600;
@@ -237,11 +325,27 @@ input:focus {
 }
 
 .notice {
-	background: var(--awe-color);
+	background: var(--brand-color-flex);
 	font-size: 1.2rem;
 	font-weight: 600;
 	color: var(--main-color);
 	padding: 0.8rem;
+	margin-top: 1rem;
+	width: fit-content;
+	border: 1px solid transparent;
+	border-radius: 0.2rem;
+}
+
+.textarea {
+	height: 200px;
+	width: 100%;
+	resize: none;
+	color: var(--accent-color);
+	border: 2px solid var(--accent-color);
+	border-radius: 5px;
+	background: var(--base-color);
+	font-size: 1.2rem;
+	padding: 0.3rem;
 }
 
 @media(min-width: 600px){
@@ -257,13 +361,123 @@ input:focus {
 		min-width: 0;
 		width: 90vw;
 	}
+	.layout-progressive {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+	h1 {
+		font-size: 2.125rem;
+		font-weight: bold;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+		font-weight: bold;
+	}
+
+	h3 {
+		font-size: 1.25rem;
+		font-weight: bold;
+	}
+
+	h4 {
+		font-size: 1.125rem;
+		font-weight: bold;
+	}
+
+	.h1 {
+		font-size: 2.125rem;
+		font-weight: bold;
+	}
+
+	.h2 {
+		font-size: 1.5rem;
+		font-weight: bold;
+	}
+
+	.h3 {
+		font-size: 1.25rem;
+		font-weight: bold;
+	}
+
+	.h4 {
+		font-size: 1.125rem;
+		font-weight: 700;
+	}
 }
 
 @media(min-width: 1000px){
 	.layout {
 		width: 80vw;
 	}
+	h1 {
+		font-size: 2.125rem;
+		font-weight: bbold;
+		line-height: 1;
+		letter-spacing: -0.0625rem;
+	}
+
+	h2 {
+		font-size: 1.875rem;
+		font-weight: bbold;
+		line-height: 1.067;
+		letter-spacing: -0.05rem;
+	}
+
+	h3 {
+		font-size: 1.5rem;
+		font-weight: bbold;
+		line-height: 1.083;
+		letter-spacing: -0.0375rem;
+	}
+
+	h4 {
+		font-size: 1.25rem;
+		font-weight: bbold;
+		line-height: 1.1;
+		letter-spacing: -0.025rem;
+	}
+
+	.h1 {
+		font-size: 2.125rem;
+		font-weight: bbold;
+		line-height: 1;
+		letter-spacing: -0.0625rem;
+	}
+
+	.h2 {
+		font-size: 1.875rem;
+		font-weight: bbold;
+		line-height: 1.067;
+		letter-spacing: -0.05rem;
+	}
+
+	.h3 {
+		font-size: 1.5rem;
+		font-weight: bbold;
+		line-height: 1.083;
+		letter-spacing: -0.0375rem;
+	}
+
+	.h4 {
+		font-size: 1.25rem;
+		font-weight: bbold;
+		line-height: 1.1;
+		letter-spacing: -0.025rem;
+	}
 }
 
 @media(min-width: 1200px){
+	/*body {
+		font-size: 1.2rem;
+		font-weight: normal;
+		line-height:1.3rem;
+	}*/
+
+	/*h1 {
+		font-size: 2.5rem;
+		font-weight: bolder;
+		line-height: 2.6rem;
+	}*/
 }
