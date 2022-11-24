@@ -40,7 +40,7 @@ const CreateUsernameBio = ({user}) => {
 	}, [name])
 
 	if(!currentUser || !username){
-		return <LoadingState />
+		return <LoadingState page='true' />
 	}	
 
 	const fields = {

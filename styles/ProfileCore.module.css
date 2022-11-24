@@ -37,7 +37,7 @@
 	border-radius: 250px;
 	overflow: hidden;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
@@ -69,7 +69,21 @@
 	border-radius: 1rem;
 }
 
-@media(min-width: 600px){}
+@media(min-width: 600px){
+	.container {
+		align-items: flex-start;
+	}
+	.coreInfoContainer {
+		align-items: flex-start;
+	}
+	.nameAndRoleContainer {
+		align-items: flex-start;
+	}
+	.bioContainer {
+		align-items: flex-start;
+		padding-right: 0.5rem;
+	}
+}
 
 @media(min-width: 1000px){}
 

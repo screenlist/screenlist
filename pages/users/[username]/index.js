@@ -7,6 +7,7 @@ import { getItems, getOneItem, baseUrl } from '../../../utils/fetch'
 import ProfileCore from '../../../components/ProfileCore'
 import SignOutButton from '../../../components/SignOutButton'
 import ProfileSettings from '../../../components/ProfileSettings'
+import LoadingState from '../../../components/LoadingState'
 
 const User = ({ user }) => {
 	const { currentUser, username } = useAuthContext()
@@ -31,8 +32,9 @@ const User = ({ user }) => {
 		
 	return (
 		<div className={styles.pageContainer}>
+			{currentUser && !username ? <LoadingState/> : null}
 			<div className={styles.topBand}>
-				<h1>Profile</h1>
+				<h1 className={styles.headingOne}>Profile</h1>
 				{!isSignedIn && !isTheirProfile ? (<Link href='/users/signup'><a className="button-awe">Create Account</a></Link>) : null}
 			</div>
 			<div className={styles.coreAndSettings}>

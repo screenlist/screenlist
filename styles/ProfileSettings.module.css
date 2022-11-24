@@ -1,4 +1,35 @@
 .settingsContainer {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
+	max-width: 350px;
+	width: 100%;
+	min-height: 400px;
+	max-height: fit-content;
 }
+
+.headingInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.headingInfo > p {
+	display: inline-block;
+	margin: 0.25rem 0;
+} 
+
+.headingInfo > h4 {
+	display: inline-block;
+	margin: 1rem 0 0.5rem 0;
+}
+
+@media(min-width: 600px){
+	.settingsContainer {
+		width: 50%;
+	}
+}
+
+@media(min-width: 1000px){}
+
+@media(min-width: 1200px){}

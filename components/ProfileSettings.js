@@ -1,6 +1,8 @@
 import { 
 	getAuth, 
 	reauthenticateWithCredential,
+	signInWithEmailAndPassword,
+	EmailAuthProvider,
 	deleteUser
 } from 'firebase/auth'
 import Link from 'next/link'
@@ -29,9 +31,11 @@ const ReAuthDelete = () => {
 			})}
 
 			onSubmit={(values, { setErrors }) => {
-				signInWithEmailAndPassword(auth, values.email, values.password).then(async (credentials) => {
-					reauthenticateWithCredential(auth, credentials).then(async () => {
+					const cred = EmailAuthProvider.credential(values.email, values.password)
+					// console.log(cred)
 
+					reauthenticateWithCredential(currentUser, cred).then(async () => {
+						// console.log("it hits")
 						try {
 							const token = await auth.currentUser.getIdToken(true)
 							fetch(`${baseUrl}/users/delete`, {
@@ -59,12 +63,14 @@ const ReAuthDelete = () => {
 						} catch (err) {
 							setServerError("Encountered an authentication error.")
 						}
-					}).catch((err) => {setServerError("Could not re-authenticate, please try again.")})			
-				}).catch((err) => { setServerError("Incorrect email or password.") })			
+					}).catch((err) => {
+						setServerError("Wrong password or email.")
+					})		
 			}}
 		>
 			<Form className="form">
-				{ serverError && <div className="error">`${serverError}`</div>}
+				<h4 className="danger">Deleting your acoount is a destructive and irreversible action!</h4>
+				{ serverError && <div className="error">{serverError}</div>}
 
 				<div className="form-field">
 					<label htmlFor= "email">Email</label>
@@ -100,11 +106,11 @@ const ProfileSettings = () => {
 				<Link href={`/users/${username}/edit`} ><a className="button-regular">Edit Profile</a></Link>
 				<SignOutButton/>
 			</div>
-			<div>
+			<div className={styles.headingInfo}>
 				<h4>Email</h4>
 				<p>{currentUser?.email ? currentUser.email : "No email"}</p>
 			</div>
-			<div>
+			<div className={styles.headingInfo}>
 				<h4>Email verification</h4>
 				<p>{currentUser?.emailVerified ? "Verified" : "Not verified"}</p>
 			</div>
