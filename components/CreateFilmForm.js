@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react'
 import * as Yup from 'yup'
+import { useRouter } from 'next/router'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { baseUrl } from '../utils/fetch'
 import SearchSimilarResources from './SearchSimilarResources'
+import useAuthContext from '../utils/useAuthContext'
+import { auth } from '../utils/firebase-config'
+import LoadingState from './LoadingState'
 
 const CreateFilmForm = () => {
 	const [name, setName] = useState('')
-
+	const [isError, setIsError] = useState(null)
+	const [loading, setLoading] = useState(false)
+	const {currentUser, username} = useAuthContext()
+	const router = useRouter()
 	const fields = {
 		name: '',
 		trailerUrl: '',
@@ -23,6 +30,7 @@ const CreateFilmForm = () => {
 
 	return (
 		<section className="form-with-bar">
+			{loading && <LoadingState/>}
 			<Formik
 				initialValues={fields}
 				validationSchema={Yup.object({
@@ -36,19 +44,43 @@ const CreateFilmForm = () => {
 					plotSummary: Yup.string().max(500, 'Plot summary is too long'),
 					releaseDate: Yup.string().length(10, 'Invalid date'),
 					initialPlatform: Yup.string(),
-					genres: Yup.array().required('Required')
+					genres: Yup.array().min(1, 'Provide at least one genre').max(4, 'Only up to 4 genres allowed').required('Required')
 				})}
 				onSubmit={async (values, { setErrors }) => {
+					setLoading(true)
 					try{
-						const credentials = ""
+						console.log(values)
+						const cleanValues = Object.fromEntries(Object.entries(values).filter(([_, value]) => value != ""))
+						console.log(cleanValues)
+						const token = await currentUser.getIdToken(true)
+						
+						const requestConfig = {
+							method: 'POST',
+							headers: {
+								AuthorizationToken: token,
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify(cleanValues)
+						}
+
+						const response = await fetch(`${baseUrl}/films`, requestConfig)
+						const data = await response.json() 
+						if(!response.ok){							
+							throw new Error(data.message)
+						}
+						console.log(data.film_id)
+						router.push(`/films/${data.film_id}`)
 					} catch(err) {
-						setAuthError("Invalid email or password")
+						console.log(err)
+						setLoading(false)
+						setIsError(err.message)
 					}
 				}}
 			>
 				<Form
 					className="form"
 					onChange={(values) => {
+						setIsError(null)
 						if(values.target.name =='name'){
 							setName(values.target.value)
 						}
@@ -56,6 +88,8 @@ const CreateFilmForm = () => {
 				>
 					<h1 className="heading-one">Add a new film</h1>
 					
+					{isError && <div className="error">{isError}</div>}
+
 					<div className="form-field" >					
 						<label htmlFor="name">Title</label>
 						<Field name="name" type="text" />
@@ -152,8 +186,65 @@ const CreateFilmForm = () => {
 					</div>
 
 					<div className="form-field" >
-						<label htmlFor="genres">Genres</label>
-						<Field name="genres" type="text" />
+						<div className="headline-four">Genres</div>
+						<div className="form-checkbox-label-container">
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="sci-fi" />
+								<span>Science Fiction</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="romance" />
+								<span>Romance</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="action" />
+								<span>Action</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="comedy" />
+								<span>Comedy</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="drama" />
+								<span>Drama</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="fantasy" />
+								<span>Fantasy</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="biography" />
+								<span>Biography</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="thriller" />
+								<span>Thriller</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="historical" />
+								<span>Historical</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="musical" />
+								<span>Musical</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="mystery" />
+								<span>Mystery</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="adventure" />
+								<span>Adventure</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="satire" />
+								<span>Satire</span>
+							</label>
+							<label className="form-checkbox-label">
+								<Field name="genres" type="checkbox" value="western" />
+								<span>Western</span>
+							</label>
+						</div>
 						<div className="error">
 							<ErrorMessage name="genres" />
 						</div>
