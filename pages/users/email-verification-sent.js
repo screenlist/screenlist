@@ -6,34 +6,15 @@ import useAuthContext from '../../utils/useAuthContext'
 import LoadingState from '../../components/LoadingState'
 
 
-const VerifyEmail = () => {
+const EmailVerificationSent = () => {
 	const { currentUser, username, setUsername } = useAuthContext()
 	const [isSent, setIsSent] = useState(false)
 
-	const router = useRouter()	
+	const router = useRouter()
 
 	const send = () => {
-		setIsSent(false)
-		sendEmailVerification(auth.currentUser).then(() => {
-			setIsSent(true)
-			signOut(auth).then(() => {
-				setUsername(null)
-				router.push('/users/email-verification-sent')
-			}).catch((err) => console.log(err))
-		}).catch((err) => {console.log(err)})
+		router.push('/users/verify-email')
 	}
-
-	useEffect(() => {
-		if(currentUser && !currentUser?.emailVerified){
-			send()
-		}		
-	}, [currentUser])
-
-	// useEffect(() => {
-	// 	if(!currentUser && !isSent){
-	// 		router.push('/users/signin')
-	// 	}		
-	// }, [])
 
 	if(currentUser?.emailVerified){
 
@@ -46,10 +27,10 @@ const VerifyEmail = () => {
 
 	return (
 		<section>
-			<h1>Sending verification email</h1>
-			<LoadingState />
+			<h1>Sent</h1>
+			<p>An email with a verification link has been sent to the email address you provided during your sign up</p>
 		</section>
 	)
 }
 
-export default VerifyEmail
+export default EmailVerificationSent
