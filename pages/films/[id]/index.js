@@ -1,11 +1,27 @@
 import Link from 'next/link'
 import { useState } from 'react'
-import useAuthContext from '../../utils/useAuthContext'
-import { getItems, getOneItem, baseUrl } from '../../utils/fetch'
+import useAuthContext from '../../../utils/useAuthContext'
+import { getItems, getOneItem, baseUrl } from '../../../utils/fetch'
+import LoadingState from '../../../components/LoadingState'
+import FilmDetails from '../../../components/FilmDetails'
+import FilmAdditionals from '../../../components/FilmAdditionals'
 
 const Film = ({data}) => {
+	console.log(data)
 	return(
-		<h1>A film here</h1>
+		<div>
+			<h1 className="flexible">{data.details.name}</h1>
+			<div className="layout-progressive">
+				<FilmDetails data={data.details} poster={data.poster} />
+				<FilmAdditionals 
+					stills={data.stills} 
+					producers={data.producers}
+					distributors={data.distributors}
+					actors={data.actors}
+					crew={data.crew}
+				/>
+			</div>
+		</div>
 	)
 }
 
@@ -21,7 +37,7 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
 	const films = await getItems('films')
-
+	console.log(films)
 	const paths = films.map((item) => ({
 		params: { id: item.id }
 	}))
