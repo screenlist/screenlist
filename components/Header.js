@@ -87,8 +87,8 @@ const Header = () => {
 			{
 				currentUser?.emailVerified == false && username ? (
 					<div className="notice" role="important notice">
-						<Link href={`/users/${username}/edit`} >
-							<a className="link">Please verify your email to use the site without heavy restrictions.</a>
+						<Link href={`/users/verify-email`} >
+							<a>Please verify your email to use the site without heavy restrictions.</a>
 						</Link>
 					</div>
 				) : null

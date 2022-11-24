@@ -107,4 +107,8 @@
 
 @media(min-width: 1000px){}
 
-@media(min-width: 1200px){}
+@media(min-width: 1200px){
+	.navLink {
+		font-size: 1.3rem;
+	}
+}
