@@ -1,13 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 
-:root {
+/*:root {
 	--brand-color: #008080;
 	--accent-color: #4D4700;
 	--main-color: #121212;
 	--danger-color: #C70300;
 	--base-color: #F6ECE5;
 	--awe-color: #CC3D00;
+	--base-color-alt: #F0FAFA;
 	--brand-color-flex: rgba(0, 128, 128, 0.4);
+}*/
+
+/*:root {
+	--brand-color: #1D3557;
+	--accent-color: #457B9D;
+	--main-color: black;
+	--danger-color: #E63946;
+	--base-color: #F1FAEE;
+	--awe-color: #457B9D;
+	--base-color-alt: #A8DADC;
+	--brand-color-flex: rgba(0, 128, 128, 0.4);
+	--bright: white;
+}*/
+
+:root {
+	--brand-color: #1D3557;
+	--accent-color: #6C757D;
+	--main-color: black;
+	--danger-color: #C70300;
+	--base-color: #F8F9FA;
+	--awe-color: #457B9D;
+	--base-color-alt: #DEE2E6;
+	--brand-color-flex: rgba(5, 25, 35, 0.7);
+	--bright: white;
+	--dark: #212529;
+	--good-color: #132A13;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-color-flex) var(--base-color);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--base-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--brand-color-flex);
+  border-radius: 20px;
+  border: 3px solid var(--base-color);
 }
 
 html,
@@ -16,7 +64,7 @@ body {
 	margin: 0;
 	font-size: 1rem;
 	font-weight: 400;
-	line-height:1.05rem;
+	line-height:1;
 	font-family: 'Red Hat Text', sans-serif;
 	background: var(--base-color);
 	color: var(--main-color);
@@ -38,17 +86,10 @@ a {
 	box-sizing: border-box;
 }
 
-h1, h2, h3 {
-	color: var(--main-color);
-}
-
-h4, h5, h6 {
-	color: var(--main-color);
-}
-
 h1 {
 	font-size: 1.5rem;
 	font-weight: bold;
+	color: var(--dark);
 }
 
 h2 {
@@ -66,14 +107,18 @@ h4 {
 	letter-spacing: -0.025rem;*/
 }
 
+p {
+	line-height: 1.2;
+}
+
 textarea {
 	height: 200px;
 	width: 100%;
 	resize: none;
-	color: var(--accent-color);
-	border: 2px solid var(--accent-color);
+	color: var(--base-color);
+	border: 2px solid var(--main-color);
 	border-radius: 5px;
-	background: var(--base-color);
+	background: var(--accent-color);
 	font-size: 1.2rem;
 	padding: 0.3rem;
 }
@@ -94,10 +139,10 @@ main {
 }
 
 input, select {
-	color: var(--accent-color);
-	background: var(--base-color);
+	color: var(--base-color);
+	background: var(--accent-color);
 	height: 2rem;
-	border: 2px solid var(--accent-color);
+	border: 2px solid var(--main-color);
 	border-radius: 5px;
 	font-size: 1.2rem;
 	padding: 0.3rem;
@@ -110,7 +155,7 @@ input:focus {
 
 .button-danger {
 	background: var(--danger-color);
-	color: var(--base-color);
+	color: var(--bright);
 	width: fit-content;
 	font-size: 1.125rem;
 	font-weight: bold;
@@ -121,7 +166,7 @@ input:focus {
 
 .button-good {
 	background: var(--brand-color);
-	color: var(--base-color);
+	color: var(--bright);
 	width: fit-content;
 	font-size: 1.125rem;
 	font-weight: bold;
@@ -132,7 +177,7 @@ input:focus {
 
 .button-awe {
 	background: var(--awe-color);
-	color: var(--base-color);
+	color: var(--bright);
 	width: fit-content;
 	font-size: 1.125rem;
 	font-weight: bold;
@@ -141,14 +186,48 @@ input:focus {
 	border-radius: 0.2rem;
 }
 
-.button-regular {
+.button-edit {
+	background: var(--base-color);
+	color: var(--base-color);
+	max-width: 25px;
+	max-height: 25px;
+	font-size: 1.125rem;
+	font-weight: bold;
+	padding: 0rem;
+	border: 0.2rem solid var(--base-color);
+	border-radius: 0.2rem;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.button-icon {
 	background: transparent;
 	color: var(--main-color);
+	width: fit-content;
+	height: fit-content;
+	font-size: 1.125rem;
+	font-weight: bold;
+	padding: 0;
+	border: none;
+	border-radius: 0.2rem;
+	transition: all 0.3s ease;
+}
+
+.button-icon:focus {
+	transform: scale(1.2);
+}
+
+.button-regular {
+	background: transparent;
+	color: var(--brand-color);
 	width: fit-content;
 	font-size: 1.125rem;
 	font-weight: bold;
 	padding: 0.125rem 0.25rem;
-	border: 0.2rem var(--main-color) solid;
+	border: 0.2rem var(--brand-color) solid;
 	border-radius: 0.2rem;
 }
 
@@ -189,6 +268,11 @@ input:focus {
 	/*min-width: 350px;*/
 	width: 90vw;
 	max-width: 335px;
+	background: var(--base-color-alt);
+	color: var(--main-color);
+	padding: 1rem;
+	border: 0.2rem var(--accent-color) solid;
+	border-radius: 0.3rem;
 }
 
 .form-bar {
@@ -227,6 +311,7 @@ input:focus {
 .form-largeText-field {}
 
 .form-page {
+	padding: 2rem 0;
 	display: grid;
 	place-items: center;
 	min-height: 70vh;
@@ -236,12 +321,14 @@ input:focus {
 	display: grid;
 	place-items: center;
 	position: fixed;
+	padding: 2rem 0;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	z-index: 10;
 	background: var(--base-color);
+	overflow-x: scroll;
 }
 
 .form-with-bar {
@@ -253,7 +340,7 @@ input:focus {
 
 .form-submit {
 	background: var(--brand-color);
-	color: var(--base-color);
+	color: var(--bright);
 	width: fit-content;
 	font-size: 1.2rem;
 	font-weight: 600;
@@ -336,6 +423,26 @@ input:focus {
 	border-radius: 0.2rem;
 }
 
+.no-scroll {
+	height: 100%;
+	overflow: hidden;
+}
+
+.search-popup {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: baseline;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	background: var(--base-color);
+	overflow-x: scroll;
+}
+
 .textarea {
 	height: 200px;
 	width: 100%;
@@ -346,6 +453,23 @@ input:focus {
 	background: var(--base-color);
 	font-size: 1.2rem;
 	padding: 0.3rem;
+}
+
+.title-band {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	min-width: 100%;
+	padding: 0;
+}
+
+.title-slim {
+	margin: 0.5rem 0;
+}
+
+.uni-pad {
+	padding: 0 0.5rem;
 }
 
 @media(min-width: 600px){
@@ -365,6 +489,9 @@ input:focus {
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: flex-start;
+	}
+	.uni-pad {
+		padding: 0;
 	}
 	h1 {
 		font-size: 2.125rem;
@@ -469,15 +596,5 @@ input:focus {
 }
 
 @media(min-width: 1200px){
-	/*body {
-		font-size: 1.2rem;
-		font-weight: normal;
-		line-height:1.3rem;
-	}*/
-
-	/*h1 {
-		font-size: 2.5rem;
-		font-weight: bolder;
-		line-height: 2.6rem;
-	}*/
+	
 }
