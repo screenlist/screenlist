@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { baseUrl } from '../utils/fetch'
 import SearchSimilarResources from './SearchSimilarResources'
 
-const CreateCompanyForm = () => {
+const CreateCompanyForm = ({setterFunction, nested}) => {
 
 	const [name, setName] = useState('')
 
@@ -32,6 +32,7 @@ const CreateCompanyForm = () => {
 				}}
 			>
 				<Form
+					className="form"
 					onChange={(values) => {
 						if(values.target.name =='name'){
 							setName(values.target.value)
@@ -40,17 +41,31 @@ const CreateCompanyForm = () => {
 				>
 					<h2>Add a new company</h2>
 
-					<label htmlFor="name">Name</label>
-					<Field name="name" type="text" />
-					<ErrorMessage name="name" />
+					<div className="form-field">
+						<label htmlFor="name">Name</label>
+						<Field name="name" type="text" />
+						<div className="error">
+							<ErrorMessage name="name" />
+						</div>
+					</div>
 
-					<label htmlFor="description">Decription</label>
-					<Field name="description" type="textarea" />
-					<ErrorMessage name="description" />
+					<div className="form-field">
+						<label htmlFor="description">Decription</label>
+						<Field name="description" type="textarea" />
+						<div className="error">
+							<ErrorMessage name="description" />
+						</div>
+					</div>
 
-					<label htmlFor="website">Website</label>
-					<Field name="website" type="text" />
-					<ErrorMessage name="website" />
+					<div className="form-field">
+						<label htmlFor="website">Website</label>
+						<Field name="website" type="text" />
+						<div className="error">
+							<ErrorMessage name="website" />
+						</div>
+					</div>
+
+					<button className="form-submit" type="submit">Create</button>
 				</Form>
 			</Formik>
 			<SearchSimilarResources name={name} resource='companies' />

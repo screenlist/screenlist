@@ -2,7 +2,9 @@ import CreateCompanyForm from '../../components/CreateCompanyForm'
 
 const AddCompany = () => {
 	return (
-		<CreateCompanyForm/>
+		<div className="form-page">
+			<CreateCompanyForm/>
+		</div>
 	)
 }
 
