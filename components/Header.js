@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import styles from '../styles/Header.module.css'
 import SignOutButton from './SignOutButton'
 import useAuthContext from '../utils/useAuthContext'
+import Search from './Search'
 
 const Header = () => {
 	const {currentUser, username} = useAuthContext()
@@ -28,6 +29,11 @@ const Header = () => {
 					</li>
 					<li>
 						<ul className={`${styles.list} ${styles.nestedList}`} >
+							<li>
+								<div>
+									<Search />
+								</div>
+							</li>
 							<li>
 								<div>
 									<Link href='/contribute'>
@@ -67,11 +73,11 @@ const Header = () => {
 							<a className={styles.navLink} >Films</a>
 						</Link>
 					</li>
-					<li>
+					{/*<li>
 						<Link href='/series'>
 							<a className={styles.navLink} >Series</a>
 						</Link>
-					</li>
+					</li>*/}
 					<li>
 						<Link href='/people'>
 							<a className={styles.navLink} >People</a>

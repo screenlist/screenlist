@@ -1,5 +1,5 @@
 .navContainer {
-	padding: 1rem;
+	padding: 1rem 0.5rem;
 	margin: 0;
 }
 
@@ -13,8 +13,8 @@
 }
 
 .nestedList {
-	width: 33vw;
-	max-width: 150px;
+	width: 50vw;
+	max-width: 200px;
 }
 
 .list > li {
@@ -41,7 +41,7 @@
 	background: var(--brand-color);
 	color: var(--base-color);
 	font-weight: bold;
-	border-bottom: 0.4rem var(--main-color) solid;
+	border-bottom: 0.4rem var(--accent-color) solid;
 	border-radius: 0.1rem;
 	text-align: center;
 }
