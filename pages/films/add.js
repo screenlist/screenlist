@@ -8,10 +8,13 @@ const AddFilm = () => {
 	const { currentUser, username, role } = useAuthContext()
 	const router = useRouter()
 
+	useEffect(() => {
+		if(!currentUser || !username){
+			router.push('/users/signin')
+		}
+	}, [])
+
 	if(!currentUser || !username) {
-		useEffect(() => {
-			router.push('/users/signup')
-		}, [])
 		return <LoadingState page="true" />
 	}
 

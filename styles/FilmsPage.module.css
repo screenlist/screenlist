@@ -49,6 +49,14 @@
 	min-width: 100%;
 }
 
+.titleText {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 120px;
+	display: inline-block;
+}
+
 @media(min-width: 600px){
 	.viewContainer {
 		grid-template-columns: repeat(4, 1fr);

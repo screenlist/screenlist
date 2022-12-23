@@ -24,6 +24,8 @@
 	position: absolute;
 	right: 0;
 	top: 0;
+	width: 2.5rem;
+	height: 2.5rem;
 }
 
 .detailsContainer {
@@ -56,12 +58,28 @@
 .datailDataContainerFlex {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: flex-start;
+	padding: 0;
 }
 
-.datailDataContainerFlex > div {
-/*	margin-right: 0.5rem;*/
+.datailDataContainerFlexChild {
+	margin-right: 1rem;
 	flex: 0 1 fit-content;
+}
+
+.datailDataContainerFlexChild > p {
+	font-size: 1.2rem;
+	margin-top: 0.7rem;
+}
+
+.datailDataContainerFlexChild > h3 {
+	background: transparent;
+	color: var(--main-color);
+	width: fit-content;
+	padding: 0.3rem 0.5rem 0 0;
+	margin-bottom: 0.1rem;
+	margin-top: 0;
+	border-bottom: 0.3rem solid var(--accent-color);
 }
 
 .listContainer {
@@ -76,8 +94,10 @@
 	list-style: none;
 	font-weight: 600;
 	margin-right: 0.5rem;
+	margin-top: 0.5rem;
 	padding: 0.5rem;
-	background: var(--brand-color-flex);
+	color: var(--main-color);
+	background: var(--base-color-alt);
 	text-align: center;
 }
 
@@ -96,6 +116,10 @@
 		align-items: flex-start;
 	}
 	.titleBand {
+		padding: 0;
+	}
+
+	.detailsContainer {
 		padding: 0;
 	}
 }

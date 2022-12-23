@@ -10,14 +10,15 @@ const Film = ({data}) => {
 	console.log(data)
 	return(
 		<div>
-			<h1 className="flexible">{data.details.name}</h1>
+			<h1 className="uni-pad">{data.details.name}</h1>
 			<div className="layout-progressive">
 				<FilmDetails data={data.details} poster={data.poster} />
 				<FilmAdditionals 
+					parentId={data.details.id}
 					stills={data.stills} 
 					producers={data.producers}
 					distributors={data.distributors}
-					actors={data.actors}
+					actors={data.cast}
 					crew={data.crew}
 				/>
 			</div>
@@ -31,13 +32,11 @@ export async function getStaticProps({ params }) {
 
 	return {
 		props: { data },
-		revalidate: 30
 	}
 }
 
 export async function getStaticPaths() {
 	const films = await getItems('films')
-	console.log(films)
 	const paths = films.map((item) => ({
 		params: { id: item.id }
 	}))
