@@ -7,7 +7,9 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_HOST: process.env.NEXT_PUBLIC_HOST,
-    NEXT_PUBLIC_SERVER: process.env.NEXT_PUBLIC_SERVER
+    NEXT_PUBLIC_SERVER: process.env.NEXT_PUBLIC_SERVER,
+    NEXT_PUBLIC_AL_APPID: process.env.NEXT_PUBLIC_AL_APPID,
+    NEXT_PUBLIC_AL_SEARCH: process.env.NEXT_PUBLIC_AL_SEARCH
   }
 }
 
