@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import { useState } from 'react'
-import useAuthContext from '../../utils/useAuthContext'
-import { getItems, getOneItem, baseUrl } from '../../utils/fetch'
+import useAuthContext from '../../../utils/useAuthContext'
+import { getItems, getOneItem, baseUrl } from '../../../utils/fetch'
 
 const Person = ({data}) => {
 	return(
-		<h1>A series here</h1>
+		<h1>{data.name}</h1>
 	)
 }
 
