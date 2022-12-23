@@ -3,74 +3,102 @@ import Image from 'next/image'
 import styles from '../styles/FilmAdditionals.module.css'
 import EmptyPhoto from './EmptyPhoto'
 import EmptyState from './EmptyState'
+import UploadPosterButton from './UploadPosterButton'
+import CreatePersonRole from './CreatePersonRole'
+import UpdatePhotoInfo from './UpdatePhotoInfo'
+import GridRoles from './GridRoles'
+import HistoryView from './HistoryView'
 
-const FilmAdditionals = ({stills, actors, crew, producers, distributors, reviews, history}) => {
+const FilmAdditionals = ({parentId, stills, actors, crew, producers, distributors, reviews}) => {
+	let stillOne, stillTwo, stillThree;
+
+	stills.forEach((item) => {
+		if(item.id=='0'){stillOne = item}
+		if(item.id=='1'){stillTwo = item}
+		if(item.id=='2'){stillThree = item}
+	})
+
 	return (
 		<section className={styles.container}>
 			<section className={styles.contentMain}>
 				<section className={styles.stillsContainer}>
 					{ 
-						stills[0] ? 
+						stillOne ? 
 						<figure>
 							<Image 
-								src={stills[0]['url']}
-								alt={stills[0]['description']}
+								src={stillOne.url}
+								alt="still picture"
 								width={960}
 								height={540}
 							/>
+							<UploadPosterButton photo='stills' type="films" id={parentId} imageIndex="0" posterObject={stillOne} />
+							<div className="title-band" style={{padding: "0 0.5rem"}}>
+								<p className="title-slim">{stillOne.credit ? <><span>&#169; </span>{stillOne.credit}</> : "Add photo credit"}</p>
+							</div>
 						</figure> :
 						<figure>
 							<EmptyPhoto type='still' />
+							<UploadPosterButton photo='stills' type="films" id={parentId} imageIndex="0" />
 						</figure>
 					}
 					{ 
-						stills[1] ? 
+						stillTwo ? 
 						<figure>
 							<Image 
-								src={stills[1]['url']}
-								alt={stills[1]['description']}
+								src={stillTwo.url}
+								alt="still picture"
 								width={960}
 								height={540}
 							/>
+							<UploadPosterButton photo='stills' type="films" id={parentId} imageIndex="1" posterObject={stillTwo} />
+							<div className="title-band" style={{padding: "0 0.5rem"}}>
+								<p className="title-slim">{stillTwo.credit ? <><span>&#169; </span> {stillTwo.credit}</>  : "Add photo credit"}</p>
+							</div>
 						</figure> :
 						<figure>
 							<EmptyPhoto type='still' />
+							<UploadPosterButton photo='stills' type="films" id={parentId} imageIndex="1" />
 						</figure>
 					}
 					{ 
-						stills[2] ? 
+						stillThree ? 
 						<figure>
 							<Image 
-								src={stills[2]['url']}
-								alt={stills[2]['description']}
+								src={stillThree.url}
+								alt="still picture"
 								width={960}
 								height={540}
 							/>
+							<UploadPosterButton photo='stills' type="films" id={parentId} imageIndex="2" posterObject={stillThree} />
+							<div className="title-band" style={{padding: "0 0.5rem"}}>
+								<p className="title-slim">{stillThree.credit ? <><span>&#169; </span> {stillThree.credit}</>  : "Add photo credit"}</p>
+							</div>
 						</figure> :
 						<figure>
 							<EmptyPhoto type='still' />
+							<UploadPosterButton photo='stills' type="films" id={parentId} imageIndex="2" />
 						</figure>
 					}
 				</section>
 				<section>
 					<div className={styles.titleBand}>
 						<h2 className="h3">Cast</h2>
-						<button type="button" className="button-awe">Edit</button>
+						<CreatePersonRole id={parentId} kind='Film' category="cast" />
 					</div>
 					{
 						actors?.length ? 
-						<div></div> :
+						<GridRoles data={actors} type='personRole' /> :
 						<EmptyState text='No cast members' height="10rem" />
 					}
 				</section>
 				<section>
 					<div className={styles.titleBand}>
 						<h2 className="h3">Crew</h2>
-						<button type="button" className="button-awe">Edit</button>
+						<CreatePersonRole id={parentId} kind='Film' category="crew" />
 					</div>
 					{
 						crew?.length ? 
-						<div></div> :
+						<GridRoles data={crew} type='personRole' /> :
 						<EmptyState text='No crew members' height="10rem" />
 					}
 				</section>
@@ -100,7 +128,7 @@ const FilmAdditionals = ({stills, actors, crew, producers, distributors, reviews
 			<section className={styles.contentSecondary}>
 				<div>
 					<div className={styles.titleBand}>
-						<h2 className="h3">Reviews</h2>
+						<h2 className="h3">Ratings</h2>
 						<button type="button" className="button-awe">Add</button>
 					</div>
 					{
@@ -113,11 +141,7 @@ const FilmAdditionals = ({stills, actors, crew, producers, distributors, reviews
 					<div className={styles.titleBand}>
 						<h2 className="h3">History</h2>
 					</div>
-					{
-						history?.length ? 
-						<div></div> :
-						<EmptyState text='No cast members' height="10rem" />
-					}
+					<HistoryView path={`films/${parentId}/history`} />
 				</div>
 			</section>
 		</section>
